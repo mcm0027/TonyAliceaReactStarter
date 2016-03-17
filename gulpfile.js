@@ -3,20 +3,10 @@
  */
 
 var gulp = require('gulp');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
+var react = require('gulp-react');
 
-gulp.task('build', function () {
-    browserify({
-        entries: './scripts/app.js',
-        extensions: ['.js'],
-        debug: true
-    })
-        .transform(babelify)
-        .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest('dist'));
+gulp.task('default', function () {
+    return gulp.src(['./scripts/*.js', './scripts/**/*.js'])
+        .pipe(react())
+        .pipe(gulp.dest('./dist'));
 });
-
-gulp.task('default', ['build']);
