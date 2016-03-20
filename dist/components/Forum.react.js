@@ -33,9 +33,16 @@ var Forum = React.createClass({displayName: "Forum",
                     React.createElement(ForumAnswers, {allAnswers:  this.state.allAnswers}), 
                     React.createElement("hr", null), 
                     React.createElement("h4", null, "Add an answer"), 
-                    React.createElement(ForumAddAnswerBox, null)
+                    React.createElement(ForumAddAnswerBox, {onAddAnswer:  this._onAddAnswer})
                 )
             )
        );
-   }
+   },
+
+    _onAddAnswer: function(answerText) {
+        ForumDispatcher.dispatch({
+            actionType: 'FORUM_ANSWER_ADDED',
+            newAnswer: answerText
+        });
+    }
 });

@@ -33,9 +33,16 @@ var Forum = React.createClass({
                     <ForumAnswers allAnswers={ this.state.allAnswers} />
                     <hr />
                     <h4>Add an answer</h4>
-                    <ForumAddAnswerBox />
+                    <ForumAddAnswerBox onAddAnswer={ this._onAddAnswer }/>
                 </div>
             </div>
        );
-   }
+   },
+
+    _onAddAnswer: function(answerText) {
+        ForumDispatcher.dispatch({
+            actionType: 'FORUM_ANSWER_ADDED',
+            newAnswer: answerText
+        });
+    }
 });
