@@ -20,3 +20,8 @@ myEmitter.on('STARTED_THE_APP', function(){
 });
 
 myEmitter.emit('STARTED_THE_APP');
+
+ForumDispatcher.register(function(action) {
+    console.log('recieved an action');
+    console.log(action);
+});
