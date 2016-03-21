@@ -6,20 +6,7 @@ var Forum = React.createClass({displayName: "Forum",
     getInitialState: function() {
 
         return {
-            allAnswers: {
-                "1": {
-                    body: "Isn't that about time travel?",
-                    correct: false
-                },
-                "2":{
-                    body: "React and Flux are so nice",
-                    correct: false
-                },
-                "3": {
-                    body: "React is a synonym for 'respond'",
-                    correct: false
-                }
-            }
+            allAnswers: ForumStore.getAnswers()
         }
     },
    render: function() {
