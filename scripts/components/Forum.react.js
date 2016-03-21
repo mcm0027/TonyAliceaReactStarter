@@ -9,8 +9,17 @@ var Forum = React.createClass({
             allAnswers: ForumStore.getAnswers()
         }
     },
-   render: function() {
-       return (
+
+    componentDidMount: function() {
+          ForumStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function() {
+        ForumStore.removeListener(this._onChange());
+    },
+
+    render: function() {
+        return (
             <div>
                 <ForumHeader />
 
@@ -23,8 +32,12 @@ var Forum = React.createClass({
                     <ForumAddAnswerBox onAddAnswer={ this._onAddAnswer }/>
                 </div>
             </div>
-       );
-   },
+        );
+    },
+
+    _onChange: function() {
+        this.setState({ allAnswers: ForumStore.getAnswers() });
+    },
 
     _onAddAnswer: function(answerText) {
         ForumDispatcher.dispatch({

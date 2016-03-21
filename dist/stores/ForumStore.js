@@ -16,6 +16,14 @@ var answerData = {
 
 var ForumStore = new EventEmitter();
 
+ForumStore.emitChange = function () {
+    this.emit('change');
+};
+
+ForumStore.addChangeListener = function(listener) {
+    this.on('change', listener);
+};
+
 ForumStore.getAnswers = function() {
     return answerData;
 };
@@ -25,6 +33,7 @@ ForumStore.addAnswer = function(newAnswer) {
         body: newAnswer,
         correct: false
     };
+    this.emitChange();
 };
 
 ForumStore.markAsCorrect = function(id) {
@@ -33,7 +42,8 @@ ForumStore.markAsCorrect = function(id) {
     }
 
     answerData[id].correct = true;
-}
+    this.emitChange();
+};
 
 ForumDispatcher.register(function(action) {
 
